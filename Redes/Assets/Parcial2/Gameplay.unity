@@ -696,7 +696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _winImage: {fileID: 2113135652}
   _defeatImage: {fileID: 404937318}
-  MinPlayerRequiredToStart: 2
+  MinPlayerRequiredToStart: 1
   _closeMeManager: {fileID: 134634275}
   _audioSource: {fileID: 670777431}
   _winSound: {fileID: 8300000, guid: f98e279ed53bda94494c8becd680629b, type: 3}
