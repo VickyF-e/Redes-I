@@ -58,6 +58,11 @@ public class BulletBehaviour2 : NetworkBehaviour
                 print("hit player");
             }
         }
+        else if (collision.GetComponent<Cudini>())
+        {
+            collision.GetComponent<Cudini>().DeActivate();
+            Runner.Despawn(Object);
+        }
         else
         {
             //print("choco con " +  collision.name);

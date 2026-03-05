@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.Windows;
+using static Unity.Collections.Unicode;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Controller_Player2
 {
@@ -29,7 +32,7 @@ public class Controller_Player2
 
         if (inputs.Buttons.IsSet(ButtonTypes.Jump) && !inputs.Buttons.IsSet(ButtonTypes.Pound))
         {
-            //Jump();
+            ShieldUp();
         }
 
         if (inputs.Buttons.IsSet(ButtonTypes.Pound))
@@ -52,55 +55,20 @@ public class Controller_Player2
             _playerScript.SpriteRenderer.flipX = false;
         }
 
-        //if (_playerScript.Runner.LocalPlayer == _playerScript.Object.InputAuthority)
-        //{
-        //    if (Mathf.Abs(inputs.XAxis) > 0.01f)
-        //        _playerScript.Anim.SetTrigger("WalkLocal");
-        //    else
-        //        _playerScript.Anim.SetTrigger("IdleLocal");
-        //}
-
     }
-
-    //public void FakeOnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.layer == 6)
-    //    {
-    //        _playerScript.GroundTouched();
-    //    }
-    //}
-
-    //public void FakeOnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.layer == 6)
-    //    {
-    //        _playerScript.SetGroundedFalse();
-    //    }
-    //}
     #endregion
 
     public void Movement(float inputY)
     {
         if (inputY == 0) return;
         _playerScript.SetCaminandoAnim();
-        _playerScript.Rb.velocity = new Vector2(0, _playerScript.Rb.velocity.y * _playerScript.Speed);
+        _playerScript.Rb.velocity = new Vector2(0, inputY * _playerScript.Speed);
     }
 
-    //public void Jump()
-    //{
-    //    _playerScript.SetGroundedFalse();
-
-    //    _playerScript.SetSaltandoAnim();
-
-    //    if (_playerScript.JumpsLeft > 0)
-    //    {
-    //        _playerScript.ReduceJump();
-    //        _playerScript.Rb.velocity = new Vector2(_playerScript.Rb.velocity.x, 0);
-    //        _playerScript.Rb.velocity += (Vector2.up * _playerScript.JumpForce);
-    //        //----------------------------------------------------------------------------------------------------------------------------------
-    //        _playerScript._audioSourceJump.PlayOneShot(_playerScript._audioClipJump);
-    //    }
-    //}
+    public void ShieldUp()
+    {
+        _playerScript.SpawnShield();
+    }
 
     public void Still()
     {

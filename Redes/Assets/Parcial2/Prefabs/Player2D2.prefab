@@ -321,6 +321,10 @@ MonoBehaviour:
   _audioClipJump: {fileID: 8300000, guid: 6c2d329bbbe30f343a5904be0829429c, type: 3}
   _audioClipDano: {fileID: 8300000, guid: f8cb922bba41be845a6b7847ee0eb1b4, type: 3}
   _audioClipPound: {fileID: 8300000, guid: 00e18d822835f714fa8e1ebed90dccfb, type: 3}
+  shield:
+    RawGuidValue: 9b335ee2757f449469e0a371a7d79c0e
+  canSpawnShield: 1
+  shieldCooldown: 5
 --- !u!114 &-4586434386185093424
 MonoBehaviour:
   m_ObjectHideFlags: 0

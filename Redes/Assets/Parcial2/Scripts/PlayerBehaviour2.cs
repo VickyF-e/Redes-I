@@ -1,5 +1,6 @@
 using Fusion;
 using System;
+using System.Collections;
 using UnityEngine;
 
 
@@ -52,6 +53,8 @@ public class PlayerBehaviour2 : NetworkBehaviour, IPlayerJoined
 
     public AudioSource _audioSourceJump, _audioSourceDano, _audioSourcePound;
     public AudioClip _audioClipJump, _audioClipDano, _audioClipPound;
+
+    public NetworkPrefabRef shield; 
 
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
@@ -153,15 +156,6 @@ public class PlayerBehaviour2 : NetworkBehaviour, IPlayerJoined
     {
         Hp = MaxHp;
     }
-    public void TPed()
-    {
-        _spriteRenderer.enabled = false;
-    }
-
-    public void TPedOff()
-    {
-        _spriteRenderer.enabled = true;
-    }
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void RPC_GetDamage(float dmg)
@@ -193,6 +187,25 @@ public class PlayerBehaviour2 : NetworkBehaviour, IPlayerJoined
         _weaponBehaviour.ShootBullet(this, DirBullet);
     }
 
+    [SerializeField] bool canSpawnShield = true;
+    [SerializeField] float shieldCooldown = 5;
+
+    public void SpawnShield()
+    {
+        if (!HasStateAuthority) return;
+        if (!canSpawnShield) return;
+
+        var shieldSpawned = Runner.Spawn(shield, transform.position, Quaternion.identity);
+        shieldSpawned.GetComponent<Cudini>().SetPadre(transform);
+        StartCoroutine(SpawnShieldBool());
+    }
+
+    IEnumerator SpawnShieldBool()
+    {
+        canSpawnShield = false;
+        yield return new WaitForSeconds(shieldCooldown);
+        canSpawnShield = true;
+    }
 
     void LifeUpdated()
     {

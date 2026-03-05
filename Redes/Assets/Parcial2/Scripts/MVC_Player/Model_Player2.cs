@@ -21,16 +21,12 @@ public class Model_Player2
 
     public void Jump()
     {
-        _playerScript.SetSaltandoAnim();
+
     }
 
     public void Still()
     {
-        if (!_playerScript.Anim.Animator.GetBool("Idle") && !_playerScript.Anim.Animator.GetBool("Cayendo"))
-        {
-            _playerScript.SetIdleAnim();
-        }
-        _playerScript.Rb.velocity = new Vector2(0, _playerScript.Rb.velocity.y);
+
     }
 
     public void Pound()
