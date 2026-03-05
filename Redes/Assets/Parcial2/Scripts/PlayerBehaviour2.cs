@@ -86,6 +86,9 @@ public class PlayerBehaviour2 : NetworkBehaviour, IPlayerJoined
 
     WeaponBehaviour _weaponBehaviour;
 
+    //[Networked, OnChangedRender(nameof(AnimStateChanged))]
+    public AnimState CurrentState { get; set; }
+
     [Networked]
     public NetworkBool IsReady { get; set; }
 
@@ -156,19 +159,37 @@ public class PlayerBehaviour2 : NetworkBehaviour, IPlayerJoined
         //}
     }
 
+    float waitEscape;
     private void Update()
     {
+
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            waitEscape += Time.deltaTime;
+            if (waitEscape >= 1)
+            {
+                Application.Quit();
+            }
+        }
+        else
+        {
+            waitEscape = 0;
+        }
+
         _hp = Hp;
 
         _lastVelocityY = Mathf.Abs(_rb.velocity.y);
 
-        if (_rb.velocity.y < 0 && !Anim.Animator.GetBool("Cayendo") && !IsGrounded)
-        {
-            SetAllAnimFalse();
-            SetCayendoAnim();
-        }
+        //if (!IsGrounded)
+        //{
+        //    if (_rb.velocity.y > 0.1f)
+        //        SetSaltandoAnim();
+        //    else if (_rb.velocity.y < -0.1f)
+        //        SetCayendoAnim();
+        //}
+        Anim.Animator.SetBool("Grounded", _isGrounded);
 
-        //Anim.Animator.SetBool("Grounded", _isGrounded);
     }
 
     public override void FixedUpdateNetwork()
@@ -186,9 +207,46 @@ public class PlayerBehaviour2 : NetworkBehaviour, IPlayerJoined
 
             float vx = Rb.velocity.x;
             float vy = Rb.velocity.y;
+
+            //if (false)
+            //{
+            //    CurrentState = AnimState.Stomped;
+            //}
+            //else if (!IsGrounded)
+            //{
+            //    if (vy > 0.1f)
+            //        CurrentState = AnimState.Jumping;
+            //    else if (vy < -0.1f)
+            //        CurrentState = AnimState.Falling;
+            //}
+            //else
+            //{
+            //    if (GetInput(out NetworkInputData netInputs) && Mathf.Abs(netInputs.XAxis) > 0.01f)
+            //        CurrentState = AnimState.Walking;
+            //    else
+            //        CurrentState = AnimState.Idle;
+            //}
         }
 
     }
+
+    //void UpdateAnimState()
+    //{
+    //    if (!IsGrounded)
+    //    {
+    //        if (_rb.velocity.y > 0.1f)
+    //            CurrentState = AnimState.Jumping;
+    //        else if (_rb.velocity.y < -0.1f)
+    //            CurrentState = AnimState.Falling;
+    //    }
+    //    else
+    //    {
+    //        if (Mathf.Abs(_rb.velocity.x) > 0.1f)
+    //            CurrentState = AnimState.Walking;
+    //        else
+    //            CurrentState = AnimState.Idle;
+    //    }
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -211,14 +269,12 @@ public class PlayerBehaviour2 : NetworkBehaviour, IPlayerJoined
     {
         IsGrounded = true;
         Anim.Animator.SetBool("Cayendo", false);
-        Anim.Animator.SetBool("Grounded", true);
         JumpsLeft = JumpsMaxAmount;
     }
 
     public void SetGroundedFalse()
     {
         IsGrounded = false;
-        Anim.Animator.SetBool("Grounded", false);
     }
 
     void SetMaxVariable()
@@ -273,6 +329,15 @@ public class PlayerBehaviour2 : NetworkBehaviour, IPlayerJoined
     {
         SetDisparoAnim();
 
+        //_weaponBehaviour.ShootBullet(this, DirBullet);
+
+
+        //if (Runner.LocalPlayer == Object.InputAuthority)
+        //    Anim.SetTrigger("Disparo");
+
+        //if (HasStateAuthority)
+        //    CurrentState = AnimState.Shooting;
+
         _weaponBehaviour.ShootBullet(this, DirBullet);
     }
 
@@ -295,6 +360,19 @@ public class PlayerBehaviour2 : NetworkBehaviour, IPlayerJoined
     {
         OnLifeUpdate?.Invoke(Hp / (float)_maxHp);
     }
+
+    //void AnimStateChanged()
+    //{
+    //    switch (CurrentState)
+    //    {
+    //        case AnimState.Idle: Anim.Animator.SetTrigger("Idle"); break;
+    //        case AnimState.Walking: Anim.Animator.SetTrigger("Walk"); break;
+    //        case AnimState.Jumping: Anim.Animator.SetTrigger("Jump"); break;
+    //        case AnimState.Falling: Anim.Animator.SetTrigger("Fall"); break;
+    //        case AnimState.Shooting: Anim.Animator.SetTrigger("Shoot"); break;
+    //        case AnimState.Stomped: Anim.Animator.SetTrigger("Stomped"); break;
+    //    }
+    //}
 
     #region Animator
     public void SetAllAnimFalse()
@@ -336,12 +414,45 @@ public class PlayerBehaviour2 : NetworkBehaviour, IPlayerJoined
     }
     public void SetDisparoAnim()
     {
-        Anim.Animator.SetTrigger("Disparo");
+        SetAllAnimFalse();
+        //Anim.SetTrigger("Disparo");
+        Anim.SetTrigger("Disparo");
     }
     public void SetAplastadoAnim()
     {
-        Anim.Animator.SetTrigger("Aplastado");
+        SetAllAnimFalse();
+        Anim.SetTrigger("Aplastado");
     }
+
+    //public void SetIdleAnim()
+    //{
+    //    Anim.Animator.SetTrigger("Idle");
+    //}
+
+    //public void SetSaltandoAnim()
+    //{
+    //    Anim.Animator.SetTrigger("Saltando");
+    //}
+
+    //public void SetCayendoAnim()
+    //{
+    //    Anim.Animator.SetTrigger("Cayendo");
+    //}
+
+    //public void SetCaminandoAnim()
+    //{
+    //    Anim.Animator.SetTrigger("Caminando");
+    //}
+
+    //public void SetDisparoAnim()
+    //{
+    //    Anim.Animator.SetTrigger("Disparo");
+    //}
+
+    //public void SetAplastadoAnim()
+    //{
+    //    Anim.Animator.SetTrigger("Aplastado");
+    //}
     #endregion
 
     public override void Despawned(NetworkRunner runner, bool hasState)
@@ -352,4 +463,15 @@ public class PlayerBehaviour2 : NetworkBehaviour, IPlayerJoined
         OnDespawn?.Invoke();
     }
 
+
+}
+
+public enum AnimState
+{
+    Idle,
+    Walking,
+    Jumping,
+    Falling,
+    Shooting,
+    Stomped
 }

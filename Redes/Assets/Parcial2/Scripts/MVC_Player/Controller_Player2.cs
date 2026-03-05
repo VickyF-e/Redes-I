@@ -15,17 +15,22 @@ public class Controller_Player2
     {
         if (!_playerScript.GetInput(out NetworkInputData inputs))
         {
+            Still();
+            Debug.Log("still");
             return;
         }
 
-        if (inputs.XAxis != 0)
-        {
-            Movement(inputs.XAxis);
-        }
-        else
-        {
-            Still();
-        }
+        //if (_playerScript.GetInput(out NetworkInputData inputs))
+        //{
+        //    if (inputs.YAxis == 0 && inputs.XAxis == 0 && !inputs.Buttons.IsSet(ButtonTypes.Jump) && !inputs.Buttons.IsSet(ButtonTypes.Pound) && !inputs.Buttons.IsSet(ButtonTypes.MouseButton0))
+        //    {
+        //        Still();
+        //        Debug.Log("still");
+        //        return;
+        //    }
+        //}
+
+        Movement(inputs.XAxis);
 
         if (inputs.Buttons.IsSet(ButtonTypes.Jump) && !inputs.Buttons.IsSet(ButtonTypes.Pound))
         {
@@ -40,6 +45,7 @@ public class Controller_Player2
         if (inputs.Buttons.IsSet(ButtonTypes.MouseButton0))
         {
             _playerScript.InstantiateBullet(inputs.MousePosition);
+            //_playerScript.SetDisparoAnim();
         }
 
 
@@ -81,9 +87,17 @@ public class Controller_Player2
 
     public void Movement(float inputX)
     {
-        if (inputX == 0) return;
+        if (inputX <= 0) return;
         _playerScript.SetCaminandoAnim();
         _playerScript.Rb.velocity = new Vector2(inputX * _playerScript.Speed, _playerScript.Rb.velocity.y);
+
+        //if (_playerScript.Runner.LocalPlayer == _playerScript.Object.InputAuthority)
+        //{
+        //    if (Mathf.Abs(inputX) > 0.01f)
+        //        _playerScript.Anim.SetTrigger("WalkLocal");
+        //    else
+        //        _playerScript.Anim.SetTrigger("IdleLocal");
+        //}
     }
 
     public void Jump()
