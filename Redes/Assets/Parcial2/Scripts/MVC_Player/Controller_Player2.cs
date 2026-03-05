@@ -18,9 +18,9 @@ public class Controller_Player2
             return;
         }
 
-        if (inputs.XAxis != 0)
+        if (inputs.YAxis != 0)
         {
-            Movement(inputs.XAxis);
+            Movement(inputs.YAxis);
         }
         else
         {
@@ -79,11 +79,11 @@ public class Controller_Player2
     //}
     #endregion
 
-    public void Movement(float inputX)
+    public void Movement(float inputY)
     {
-        if (inputX == 0) return;
+        if (inputY == 0) return;
         _playerScript.SetCaminandoAnim();
-        _playerScript.Rb.velocity = new Vector2(inputX * _playerScript.Speed, _playerScript.Rb.velocity.y);
+        _playerScript.Rb.velocity = new Vector2(0, _playerScript.Rb.velocity.y * _playerScript.Speed);
     }
 
     //public void Jump()

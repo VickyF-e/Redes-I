@@ -192,7 +192,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -203,7 +203,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!61 &7819418120676872487
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -306,24 +306,13 @@ MonoBehaviour:
   _maxHp: 100
   _speed: 5
   _rb: {fileID: 0}
-  _jumpForce: 7
-  _jumpsAmount: 2
-  _jumpsLeft: 0
-  _jumpCost: 1
-  _isGrounded: 0
-  _isFalling: 0
-  _poundForce: 41
   _spriteRenderer: {fileID: 788556969948831910}
   _anim: {fileID: 3176677138528807919}
   _team: 0
   _bulletPrefab: {fileID: 296302527486661749, guid: a656413bf42b8ad4d80f7004c3042fb3,
     type: 3}
-  _hasJustBeenTp: 0
-  _requiredPoundVelocity: 15
-  _poundDamage: 25
   _CanPlay:
     _value: 0
-  _CurrentState: 0
   _IsReady:
     _value: 0
   _audioSourceJump: {fileID: 2508090405039110698}
