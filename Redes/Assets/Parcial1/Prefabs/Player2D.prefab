@@ -309,8 +309,8 @@ MonoBehaviour:
   ApplyTiming: 2
   SyncSettings: 79
   StateHashes: 00000000b7ecec0a12a80bb535930a92b1b0dc7d0af95b598eda8db608143596e3d7bd6b6bf3b54480303db9e9974314aa397017
-  TriggerHashes: 00000000af2c8f5ebdb6a8c34bf84a88caff24d3
-  TotalWords: 2
+  TriggerHashes: 00000000caff24d34bf84a882b1a167cf49580e3154161fdaf2c8f5ebdb6a8c3aaddc84d9b1161bda9449d32
+  TotalWords: 3
 --- !u!1 &8866755790122054688
 GameObject:
   m_ObjectHideFlags: 0
