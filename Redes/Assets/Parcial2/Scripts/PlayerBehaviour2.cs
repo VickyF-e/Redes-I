@@ -103,6 +103,7 @@ public class PlayerBehaviour2 : NetworkBehaviour, IPlayerJoined
         if (SelectedTeam == PlayerTeam.Orange)
         {
             SpriteRenderer.material = _orangeMaterial;
+            SpriteRenderer.flipX = true;
             return;
         }
 
