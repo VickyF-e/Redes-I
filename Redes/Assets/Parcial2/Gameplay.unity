@@ -1759,7 +1759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _readyCanvas: {fileID: 1260217974}
-  _textReady: {fileID: 0}
+  _textReady: {fileID: 2135334661}
   _readyButton: {fileID: 366807209}
   _cursorManager: {fileID: 1972887216}
   _player: {fileID: 0}

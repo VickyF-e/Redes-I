@@ -28,15 +28,13 @@ public class ReadyOrNotScript : MonoBehaviour
     {
         if (!Ready)
         {
-            _textReady.color = Color.green;
-            _textReady.text = "READY";
+            _textReady.text = "Listoooos";
             Ready = true;
             _player.RPCSetBoolReady(true);
         }
         else
         {
-            _textReady.color = Color.red;
-            _textReady.text = "NOT READY";
+            _textReady.text = "No Listos :(";
             Ready = false;
             _player.RPCSetBoolReady(false);
         }

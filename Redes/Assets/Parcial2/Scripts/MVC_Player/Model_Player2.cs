@@ -21,16 +21,16 @@ public class Model_Player2
 
     public void Jump()
     {
-        _playerScript.SetGroundedFalse();
+        //_playerScript.SetGroundedFalse();
 
         _playerScript.SetSaltandoAnim();
 
-        if (_playerScript.JumpsLeft > 0)
-        {
-            _playerScript.ReduceJump();
-            _playerScript.Rb.velocity = new Vector2(_playerScript.Rb.velocity.x, 0);
-            _playerScript.Rb.velocity += (Vector2.up * _playerScript.JumpForce);
-        }
+        //if (_playerScript.JumpsLeft > 0)
+        //{
+        //    _playerScript.ReduceJump();
+        //    _playerScript.Rb.velocity = new Vector2(_playerScript.Rb.velocity.x, 0);
+        //    _playerScript.Rb.velocity += (Vector2.up * _playerScript.JumpForce);
+        //}
     }
 
     public void Still()
@@ -44,10 +44,10 @@ public class Model_Player2
 
     public void Pound()
     {
-        if (_playerScript.IsGrounded) return;
+        //if (_playerScript.IsGrounded) return;
 
-        _playerScript.SetCayendoAnim();
-        _playerScript.Rb.velocity += (-Vector2.up * _playerScript.PoundForce * _playerScript.Runner.DeltaTime);
+        //_playerScript.SetCayendoAnim();
+        //_playerScript.Rb.velocity += (-Vector2.up * _playerScript.PoundForce * _playerScript.Runner.DeltaTime);
     }
 
     public void FlipX()

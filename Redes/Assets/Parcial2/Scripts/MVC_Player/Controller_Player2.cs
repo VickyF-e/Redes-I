@@ -29,12 +29,12 @@ public class Controller_Player2
 
         if (inputs.Buttons.IsSet(ButtonTypes.Jump) && !inputs.Buttons.IsSet(ButtonTypes.Pound))
         {
-            Jump();
+            //Jump();
         }
 
         if (inputs.Buttons.IsSet(ButtonTypes.Pound))
         {
-            Pound();
+            //Pound();
         }
 
         if (inputs.Buttons.IsSet(ButtonTypes.MouseButton0))
@@ -62,21 +62,21 @@ public class Controller_Player2
 
     }
 
-    public void FakeOnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 6)
-        {
-            _playerScript.GroundTouched();
-        }
-    }
+    //public void FakeOnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.layer == 6)
+    //    {
+    //        _playerScript.GroundTouched();
+    //    }
+    //}
 
-    public void FakeOnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 6)
-        {
-            _playerScript.SetGroundedFalse();
-        }
-    }
+    //public void FakeOnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.layer == 6)
+    //    {
+    //        _playerScript.SetGroundedFalse();
+    //    }
+    //}
     #endregion
 
     public void Movement(float inputX)
@@ -86,21 +86,21 @@ public class Controller_Player2
         _playerScript.Rb.velocity = new Vector2(inputX * _playerScript.Speed, _playerScript.Rb.velocity.y);
     }
 
-    public void Jump()
-    {
-        _playerScript.SetGroundedFalse();
+    //public void Jump()
+    //{
+    //    _playerScript.SetGroundedFalse();
 
-        _playerScript.SetSaltandoAnim();
+    //    _playerScript.SetSaltandoAnim();
 
-        if (_playerScript.JumpsLeft > 0)
-        {
-            _playerScript.ReduceJump();
-            _playerScript.Rb.velocity = new Vector2(_playerScript.Rb.velocity.x, 0);
-            _playerScript.Rb.velocity += (Vector2.up * _playerScript.JumpForce);
-            //----------------------------------------------------------------------------------------------------------------------------------
-            _playerScript._audioSourceJump.PlayOneShot(_playerScript._audioClipJump);
-        }
-    }
+    //    if (_playerScript.JumpsLeft > 0)
+    //    {
+    //        _playerScript.ReduceJump();
+    //        _playerScript.Rb.velocity = new Vector2(_playerScript.Rb.velocity.x, 0);
+    //        _playerScript.Rb.velocity += (Vector2.up * _playerScript.JumpForce);
+    //        //----------------------------------------------------------------------------------------------------------------------------------
+    //        _playerScript._audioSourceJump.PlayOneShot(_playerScript._audioClipJump);
+    //    }
+    //}
 
     public void Still()
     {
@@ -111,12 +111,12 @@ public class Controller_Player2
         _playerScript.Rb.velocity = new Vector2(0, _playerScript.Rb.velocity.y);
     }
 
-    public void Pound()
-    {
-        if (_playerScript.IsGrounded) return;
+    //public void Pound()
+    //{
+    //    if (_playerScript.IsGrounded) return;
 
-        _playerScript.SetCayendoAnim();
-        _playerScript.Rb.velocity += (-Vector2.up * _playerScript.PoundForce * _playerScript.Runner.DeltaTime);
-    }
+    //    _playerScript.SetCayendoAnim();
+    //    _playerScript.Rb.velocity += (-Vector2.up * _playerScript.PoundForce * _playerScript.Runner.DeltaTime);
+    //}
 
 }
